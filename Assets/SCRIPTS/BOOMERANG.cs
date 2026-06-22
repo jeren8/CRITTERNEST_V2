@@ -17,21 +17,25 @@ public class BOOMERANG : MonoBehaviour
     {
         if (!regresar)
         {
-            transform.Translate(Vector3.right * velocidad * Time.deltaTime);
+            // Avanza hacia la derecha
+            transform.position += Vector3.right * velocidad * Time.deltaTime;
 
-            if (Vector3.Distance(transform.position, inicio) > 3)
+            // Cuando recorra 3 unidades, empieza a regresar
+            if (Vector3.Distance(transform.position, inicio) > 3f)
             {
                 regresar = true;
             }
         }
         else
         {
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                jugador.position,
-                velocidad * Time.deltaTime
-            );
+            // Calcula la dirección hacia el jugador
+            Vector3 direccion = jugador.position - transform.position;
+            direccion = direccion.normalized;
 
+            // Se mueve hacia el jugador
+            transform.position += direccion * velocidad * Time.deltaTime;
+
+            // Si llega cerca del jugador, se destruye
             if (Vector3.Distance(transform.position, jugador.position) < 0.5f)
             {
                 Destroy(gameObject);

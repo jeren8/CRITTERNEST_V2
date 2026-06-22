@@ -6,6 +6,7 @@ public class Enemigo : MonoBehaviour
     public float velocidad = 3f;
     public float distanciaDeteccion = 5f;
 
+
     void Update()
     {
         float distancia = Vector2.Distance(transform.position, jugador.position);
